@@ -339,10 +339,10 @@ class Postgres
             }
 
             // last insert|null
-            $lastInsert = $pdoStatement->fetch(\PDO::FETCH_NUM);
+            $lastInsert = $this->getDbh()->lastInsertId();
 
             // cache response
-            $responses[] = $lastInsert !== false ? (int)$lastInsert[0] : true;
+            $responses[] = $lastInsert !== false ? intval($lastInsert) : true;
         }
 
         return $responses;
